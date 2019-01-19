@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <form th:object="${jobForm}" method="post">
+
+        <div class="form-group">
+            <label th:for="name">Name</label>
+            <input th:field="*{name}" />
+            <div th:errors="*{name}"></div>
+        </div>
+
+        <div class="form-group">
+            <label th:for="employerId">Employer</label>
+            <select th:field="*{employerId}">
+                <option th:each="employer : *{employers}"
+                        th:value="${employer.id}"
+                        th:text="${employer.value}"></option>
+            </select>
+        </div>
+
+        <!-- TODO #5 - Create <select> dropdowns for other job fields -->
+
+
+        <!--This creates a drop down menu with the options in each categories -->
+        <div class="form-group">
+            <label th:for="locationId">Locations</label>
+            <!-- This is similar to id="locationId" text="locationId" value="locationId"-->
+            <select th:field="*{locationId}">
+                <!-- Getting the options from the object-->
+                <option th:each="location : *{locations}"
+                        th:value="${location.id}"
+                        th:text="${location.value}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label th:for="coreCompetenciesId">Core Competencies</label>
+            <select th:field="*{coreCompetenciesId}">
+                <option th:each="core : *{coreCompetencies}"
+                        th:value="${core.id}"
+                        th:text="${core.value}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label th:for="positionTypesId">Position Type</label>
+            <select th:field="*{positionTypesId}">
+                <option th:each="position: *{positionTypes}"
+                        th:value="${position.id}"
+                        th:text="${position.value}"
+                ></option>
+
+            </select>
+        </div>
+
+        <input type="submit" value="Add Job" />
+    </form>
+
+</div>
+
+</body>
+</html>
